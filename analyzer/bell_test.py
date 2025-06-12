@@ -2,8 +2,6 @@ from qiskit import QuantumCircuit, transpile
 from qiskit_aer import AerSimulator
 import numpy as np
 
-angles = [0, np.pi/4, np.pi/2]
-
 def run_bell_test(rounds, alice_angles, bob_angles):
     simulator = AerSimulator()
     alice_bits, bob_bits = [], []

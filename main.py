@@ -5,13 +5,6 @@ import plotly.express as px
 import plotly.graph_objects as go
 import math
 
-# Optional: Page setup
-st.set_page_config(page_title="BIV Analyzer", layout="wide")
-st.title("🔐 Bell Inequality Violation Analyzer (BIVA)")
-
-# Slider for round selection
-rounds = st.slider("🔄 Number of Rounds", min_value=10, max_value=1000, value=100, step=1)
-
 def plot_metric_bar(s_value, qber, key_rate):
     metrics = ['CHSH S-Value', 'QBER', 'Key Rate']
     values = [s_value, qber, key_rate]
@@ -90,6 +83,12 @@ def plot_bit_matches(alice_bits, bob_bits):
     fig.update_layout(yaxis=dict(tickmode='array', tickvals=[0, 1]))
     st.plotly_chart(fig, use_container_width=True)
 
+# Optional: Page setup
+st.set_page_config(page_title="BIV Analyzer", layout="wide")
+st.title("🔐 Bell Inequality Violation Analyzer (BIVA)")
+
+# Slider for round selection
+rounds = st.slider("🔄 Number of Rounds", min_value=10, max_value=1000, value=100, step=1)
 
 st.subheader("📐 Measurement Angles (in degrees)")
 
@@ -134,7 +133,7 @@ if results is not None:
         st.warning("⚠️ CHSH S-Value not computed in this run.")
 
     # st.metric("CHSH S-Value", results['s_value'])
-    st.metric("QBER (Quantum Bit Error Rate)", f"{results['qber']:.4f}")
+    st.metric("QBER (Quantum Bit Error Rate)", f"{results['qber']*100:.2f}%")
     st.metric("Final Key Length", len(results['final_key']))
     # st.metric("Final Key ", results['final_key'])
     st.text(f"🔑 Final Key: {''.join(map(str, results['final_key']))}")
